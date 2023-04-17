@@ -11,15 +11,12 @@ export const ImageGallery = ({ currentPage, searchQuery, addButton }) => {
   const [error, setError] = useState(null);
   const [isShowModal, setIsShowModal] = useState(false);
   const [largeImageURL, setLargeImageURL] = useState('');
-  const [isLoadMore, setIsLoadMore] = useState(true);
   useEffect(() => {
-    const searchText = searchQuery.trim();
-    if (!searchText) return;
+    if (!searchQuery) return;
     async function getImages() {
       try {
         setIsLoading(true);
-        setIsLoadMore(true);
-        const articles = await api.fetchArticlesWithQuery(searchText, 1);
+        const articles = await api.fetchArticlesWithQuery(searchQuery, 1);
         const images = articles.hits.map(
           ({ id, tags, webformatURL, largeImageURL }) => ({
             id,
@@ -39,14 +36,13 @@ export const ImageGallery = ({ currentPage, searchQuery, addButton }) => {
     getImages();
   }, [searchQuery]);
   useEffect(() => {
-    const searchText = searchQuery.trim();
-    if (!searchText) return;
+    if (!searchQuery) return;
     async function getImages() {
       if (currentPage !== 1) {
         setIsLoading(true);
         try {
           const articles = await api.fetchArticlesWithQuery(
-            searchText,
+            searchQuery,
             currentPage
           );
           const images = articles.hits.map(
@@ -70,7 +66,7 @@ export const ImageGallery = ({ currentPage, searchQuery, addButton }) => {
       }
     }
     getImages();
-  }, [currentPage]);
+  }, [currentPage, searchQuery]);
   const imageClick = e => {
     const imageSrc = e.target.src;
     const index = images.findIndex(image => image.webformatURL === imageSrc);

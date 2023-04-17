@@ -29,35 +29,10 @@ export const App = () => {
 
       <ImageGallery
         addButton={addButton}
-        searchQuery={searchQuery}
+        searchQuery={searchQuery.trim()}
         currentPage={page}
       />
       {articles.length === 12 ? <Button onLoadMore={onLoadMore} /> : null}
     </div>
   );
 };
-
-// export class App extends Component {
-//   state = {
-//     searchQuery: '',
-//     page: 1,
-//     articles: [],
-//   };
-//   onSubmit = searchQuery => {
-//     this.setState({ searchQuery });
-//   };
-//   onLoadMore = page => {
-//     this.setState({ page });
-//   };
-
-//   addButton = articles => {
-//     this.setState({ articles });
-//   };
-
-//   render() {
-//     const { searchQuery, page, articles } = this.state;
-//     return (
-
-//     );
-//   }
-// }
