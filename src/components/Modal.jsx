@@ -2,17 +2,17 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 export const Modal = ({ largeImageURL, closeModal }) => {
-  useEffect(() => {
-    window.addEventListener('keydown', handlePressESC);
-    return () => {
-      window.removeEventListener('keydown', handlePressESC);
-    };
-  }, []);
   const handlePressESC = e => {
     if (e.code === 'Escape') {
       closeModal();
     }
   };
+  useEffect(() => {
+    window.addEventListener('keydown', handlePressESC);
+    return () => {
+      window.removeEventListener('keydown', handlePressESC);
+    };
+  });
   const handleOverlayClick = e => {
     if (e.currentTarget === e.target) {
       closeModal();
@@ -27,8 +27,6 @@ export const Modal = ({ largeImageURL, closeModal }) => {
     </div>
   );
 };
-
-
 
 Modal.propTypes = {
   closeModal: PropTypes.func.isRequired,
