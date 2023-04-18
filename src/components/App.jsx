@@ -12,16 +12,13 @@ export const App = () => {
   const [articles, setArticles] = useState([]);
   const onSubmit = searchQuery => {
     setSearchQuery(searchQuery);
-    // this.setState({ searchQuery });
   };
   const onLoadMore = page => {
     setPage(page);
-    // this.setState({ page });
   };
 
   const addButton = articles => {
     setArticles(articles);
-    // this.setState({ articles });
   };
   return (
     <div className="App">

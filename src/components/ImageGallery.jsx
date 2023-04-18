@@ -26,6 +26,7 @@ export const ImageGallery = ({ currentPage, searchQuery, addButton }) => {
           })
         );
         setImages(images);
+        // eslint-disable-next-line
         addButton(images);
       } catch (error) {
         setError(error);
