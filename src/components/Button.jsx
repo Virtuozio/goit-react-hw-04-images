@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Button = ({ onLoadMore }) => {
-  const [page, setPage] = useState(1);
+export const Button = ({ page, onLoadMore }) => {
   const handleClick = () => {
-    setPage(prevPage => prevPage + 1);
-    // this.setState(prevState => ({
-    //   page: prevState.page + 1,
-    // }));
     onLoadMore(page + 1);
   };
   return (

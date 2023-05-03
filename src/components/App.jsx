@@ -12,6 +12,7 @@ export const App = () => {
   const [articles, setArticles] = useState([]);
   const onSubmit = searchQuery => {
     setSearchQuery(searchQuery);
+    setPage(1);
   };
   const onLoadMore = page => {
     setPage(page);
@@ -29,7 +30,9 @@ export const App = () => {
         searchQuery={searchQuery.trim()}
         currentPage={page}
       />
-      {articles.length === 12 ? <Button onLoadMore={onLoadMore} /> : null}
+      {articles.length % 12 === 0 && articles.length !== 0 ? (
+        <Button page={page} onLoadMore={onLoadMore} />
+      ) : null}
     </div>
   );
 };

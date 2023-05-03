@@ -11,6 +11,8 @@ export const ImageGallery = ({ currentPage, searchQuery, addButton }) => {
   const [error, setError] = useState(null);
   const [isShowModal, setIsShowModal] = useState(false);
   const [largeImageURL, setLargeImageURL] = useState('');
+  if (images) addButton(images);
+
   useEffect(() => {
     if (!searchQuery) return;
     async function getImages() {
@@ -26,8 +28,6 @@ export const ImageGallery = ({ currentPage, searchQuery, addButton }) => {
           })
         );
         setImages(images);
-        // eslint-disable-next-line
-        addButton(images);
       } catch (error) {
         setError(error);
       } finally {
@@ -85,7 +85,7 @@ export const ImageGallery = ({ currentPage, searchQuery, addButton }) => {
         <Modal largeImageURL={largeImageURL} closeModal={closeModal} />
       )}
       {error && <p>Whoops, something went wrong: {error.message}</p>}
-      {isLoading && currentPage === 1 && <Loader />}
+      {isLoading && currentPage !== 1 && <Loader />}
       <ul className="ImageGallery" onClick={e => imageClick(e)}>
         {images &&
           images.map(({ id, webformatURL, tags }) => (
